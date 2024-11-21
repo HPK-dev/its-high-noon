@@ -1,0 +1,6 @@
+indentation: 4
+indent-wheres: true
+haddock-style: single-line
+record-brace-space: true
+import-grouping: by-scope-then-qualified
+respectful: false

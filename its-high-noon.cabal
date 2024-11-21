@@ -65,7 +65,7 @@ executable its-high-noon
   main-is:          Main.hs
 
   -- Modules included in this executable, other than Main.
-  other-modules: Database
+  other-modules:    Database
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
@@ -73,8 +73,11 @@ executable its-high-noon
   -- Other library packages from which modules are imported.
   build-depends:
     , base               ^>=4.17.2.1
-    , postgresql-simple  ^>=0.7.0.0
+    , data-default       ^>=0.8.0.0
     , dotenv             ^>=0.12.0.0
+    , postgresql-simple  ^>=0.7.0.0
+    , random             ^>=1.2.1.2
+    , text               ^>=2.0.2
 
   -- Directories containing source files.
   hs-source-dirs:   src
