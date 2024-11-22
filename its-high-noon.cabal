@@ -53,9 +53,7 @@ extra-doc-files: CHANGELOG.md
 -- extra-source-files:
 
 common warnings
-  ghc-options:   -Wall
-  with-compiler: ghc-9.4.8
-  language:      GHC2021: Haskell2020
+  ghc-options: -Wall
 
 executable its-high-noon
   -- Import common warning flags.
@@ -65,19 +63,31 @@ executable its-high-noon
   main-is:          Main.hs
 
   -- Modules included in this executable, other than Main.
-  other-modules:    Database
+  other-modules:
+    Database
+    WebhookServer
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
   build-depends:
+    , aeson              ^>=2.2.3.0
     , base               ^>=4.17.2.1
+    , base64-bytestring  ^>=1.2.1.0
+    , bytestring         ^>=0.11.5.3
+    , cryptohash-sha256  ^>=0.11
     , data-default       ^>=0.8.0.0
     , dotenv             ^>=0.12.0.0
+    , fast-logger        ^>=3.0.0
+    , http-types         ^>=0.12.4
     , postgresql-simple  ^>=0.7.0.0
     , random             ^>=1.2.1.2
+    , servant-server     ^>=0.20
     , text               ^>=2.0.2
+    , time               ^>=1.12.2
+    , wai                ^>=3.2.4
+    , warp               ^>=3.4.5
 
   -- Directories containing source files.
   hs-source-dirs:   src

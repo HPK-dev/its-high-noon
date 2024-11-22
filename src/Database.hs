@@ -14,7 +14,7 @@ module Database (
     QueryError (..),
 ) where
 
-import Configuration.Dotenv (defaultConfig, loadFile)
+
 import Control.Exception (Exception, throwIO)
 import Control.Monad (when)
 import Data.Default (Default (..))
@@ -34,7 +34,6 @@ import Database.PostgreSQL.Simple.ToField (Action, ToField (toField))
 import Database.PostgreSQL.Simple.ToRow (ToRow)
 import Database.PostgreSQL.Simple.Types (Query (..))
 import GHC.Generics (Generic)
-import System.Environment (getEnv)
 
 -- | Database configuration
 data DBConfig = DBConfig
@@ -89,20 +88,9 @@ instance Default QueryFields where
             , queryDetails = Nothing
             }
 
--- | Load database configuration from environment
-loadDBConfig :: IO DBConfig
-loadDBConfig = do
-    loadFile defaultConfig
-    DBConfig
-        <$> getEnv "DB_HOST"
-        <*> getEnv "DB_NAME"
-        <*> getEnv "DB_USER"
-        <*> getEnv "DB_PASS"
-
 -- | Create database connection
-connectDB :: IO Connection
-connectDB = do
-    DBConfig {..} <- loadDBConfig
+connectDB :: DBConfig -> IO Connection
+connectDB DBConfig {..} = do
     connect
         defaultConnectInfo
             { connectHost = dbHost
