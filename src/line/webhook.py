@@ -64,9 +64,9 @@ def message_text(event: MessageEvent) -> None:
         LOGGER.debug("Received text: %s", received)
 
         reply = process_message(received)
-        LOGGER.debug("Sent reply: %s", reply)
-
-        send_reply(event, reply)
+        if reply:
+            LOGGER.debug("Sent reply: %s", reply)
+            send_reply(event, reply)
 
     except Exception as e:
         LOGGER.error("Error processing message: %s", str(e), exc_info=True)
@@ -77,4 +77,6 @@ def message_text(event: MessageEvent) -> None:
 def process_message(text: str) -> StrictStr:
     """Process incoming message and generate reply."""
     # TODO: Implement message processing logic here
-    return text  # Echo back for now
+    if text == 'status':
+        return  'Service online.'
+    return False
