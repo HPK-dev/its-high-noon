@@ -46,6 +46,8 @@ class Keys(enum.Enum):
     CMD_TOGGLE_DISABLE = 'cmd_toggle_disable'
     CMD_UNKNOWN = 'cmd_unknown'
     CMD_SCREAM = 'cmd_scream'
+    EAT_REPLY = 'eat_reply'
+    EAT_RESPOND = 'eat_respond'
 
 
 class I18nManager:

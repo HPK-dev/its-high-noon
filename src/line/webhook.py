@@ -1,5 +1,6 @@
 import dataclasses
 import logging
+import random
 from typing import Optional
 
 from linebot.v3.exceptions import InvalidSignatureError
@@ -145,5 +146,7 @@ def process_message(ctx: ProcessContext) -> str | None:
               or "owo" in text.lower()
               or "uwu" in text.lower()):
             return "Ciallo (∠·ω )⌒★"
+        elif text == I18N.get(Keys.EAT_REPLY, ctx.lang):
+            return random.choice(I18N.get(Keys.EAT_RESPONSE))
 
     return None
