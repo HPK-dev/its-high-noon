@@ -49,7 +49,7 @@ class Keys(enum.Enum):
     CMD_ABOUT = 'cmd_about'
     
     JOKE_REPLY = 'joke_reply'
-    JOKE_RESPONCE = 'joke_response'
+    JOKE_RESPONSE = 'joke_response'
 
     EAT_REPLY = 'eat_reply'
     EAT_RESPONSE = 'eat_response'
