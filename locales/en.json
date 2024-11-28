@@ -114,6 +114,7 @@
       "Cheese Burger",
       "quaso",
       "Malatang"
+
   ],
   "cmd_about":"A LINE bot designed for students preparing for the university entrance exam, offering the following features to make your preparation more organized:\n1. Daily countdown reminders: Keep track of the remaining days until the exam and plan your time effectively.\n2. Practice questions with detailed explanations: Receive high-quality daily practice questions to assess your skills and improve weaknesses.\n3. Key point summaries: Quickly grasp the core knowledge of each subject for more efficient review.\n4. Question inquiry: Privately ask the bot exam-related questions (responses are provided based on availability).\n5. Various commands to assist learning: Includes time management tips, mock exam advice, and more to enhance study efficiency.\n6. The Exam Countdown Bot is here to support you every step of the way!\nJoin now to make your preparation more effective!",
   "joke_reply":"tell a joke",
@@ -139,4 +140,5 @@
     "What did the big flower say to the little flower?\nHey, bud!",
     "Why don’t skeletons ever use cell phones?\nBecause they don’t have the stomach for it."
   ]  
+
 }

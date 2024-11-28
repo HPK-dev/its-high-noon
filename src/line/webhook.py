@@ -153,4 +153,5 @@ def process_message(ctx: ProcessContext) -> str | None:
         elif text == I18N.get(Keys.JOKE_REPLY, ctx.lang):
             return random.choice(I18N.get(Keys.JOKE_RESPONSE, ctx.lang))
 
+
     return None
