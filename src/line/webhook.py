@@ -147,6 +147,6 @@ def process_message(ctx: ProcessContext) -> str | None:
               or "uwu" in text.lower()):
             return "Ciallo (∠·ω )⌒★"
         elif text == I18N.get(Keys.EAT_REPLY, ctx.lang):
-            return random.choice(I18N.get(Keys.EAT_RESPONSE))
+            return random.choice(I18N.get(Keys.EAT_RESPONSE, ctx.lang))
 
     return None
