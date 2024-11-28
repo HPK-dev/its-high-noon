@@ -114,5 +114,31 @@
       "Cheese Burger",
       "quaso",
       "Malatang"
-  ]
+
+  ],
+  "cmd_about":"A LINE bot designed for students preparing for the university entrance exam, offering the following features to make your preparation more organized:\n1. Daily countdown reminders: Keep track of the remaining days until the exam and plan your time effectively.\n2. Practice questions with detailed explanations: Receive high-quality daily practice questions to assess your skills and improve weaknesses.\n3. Key point summaries: Quickly grasp the core knowledge of each subject for more efficient review.\n4. Question inquiry: Privately ask the bot exam-related questions (responses are provided based on availability).\n5. Various commands to assist learning: Includes time management tips, mock exam advice, and more to enhance study efficiency.\n6. The Exam Countdown Bot is here to support you every step of the way!\nJoin now to make your preparation more effective!",
+  "joke_reply":"tell a joke",
+  "joke_response":[
+    "Why don't skeletons fight each other?\nThey don't have the guts.",
+    "Why did the scarecrow win an award?\nBecause he was outstanding in his field!",
+    "Why don’t eggs tell jokes?\nBecause they might crack up.",
+    "What do you call fake spaghetti?\nAn impasta!",
+    "Why was the math book sad?\nBecause it had too many problems.",
+    "Why don’t scientists trust atoms?\nBecause they make up everything!",
+    "What do you get when you cross a snowman and a vampire?\nFrostbite.",
+    "Why did the tomato turn red?\nBecause it saw the salad dressing!",
+    "How does a penguin build its house?\nIgloos it together!",
+    "What do you call cheese that isn't yours?\nNacho cheese!",
+    "Why did the bicycle fall over?\nBecause it was two-tired.",
+    "What did one ocean say to the other ocean?\nNothing, they just waved.",
+    "Why don't oysters donate to charity?\nBecause they are shellfish.",
+    "What’s orange and sounds like a parrot?\nA carrot!",
+    "Why did the computer go to the doctor?\nBecause it had a virus!",
+    "Why are frogs so happy?\nBecause they eat whatever bugs them!",
+    "What did one hat say to the other?\nStay here, I'm going on ahead!",
+    "Why did the golfer bring two pairs of pants?\nIn case he got a hole in one.",
+    "What did the big flower say to the little flower?\nHey, bud!",
+    "Why don’t skeletons ever use cell phones?\nBecause they don’t have the stomach for it."
+  ]  
+
 }

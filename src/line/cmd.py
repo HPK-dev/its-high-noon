@@ -130,6 +130,9 @@ def cmd_scream(ctx):
 def cmd_ping(_):
     return "pong"
 
+def cmd_about(ctx):
+    return I18N.get(Keys.CMD_ABOUT, ctx.lang)
+
 
 CMD.register_command("help", cmd_help)
 CMD.register_command("toggle", cmd_toggle)
@@ -140,3 +143,4 @@ CMD.register_command("114", cmd_114)
 CMD.register_command("roll", cmd_roll)
 CMD.register_command("scream", cmd_scream)
 CMD.register_command("ping", cmd_ping)
+CMD.register_command("about", cmd_about)
