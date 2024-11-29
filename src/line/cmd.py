@@ -6,6 +6,7 @@ from typing import Callable, List, Optional
 from src.const import I18N
 from src.database import user
 from src.i18n import Keys, Langs
+from src.line.daily import make_question, countdown
 
 LOGGER = logging.getLogger("line-webhook-cmd")
 
@@ -134,6 +135,12 @@ def cmd_about(ctx):
     return I18N.get(Keys.CMD_ABOUT, ctx.lang)
 
 
+def cmd_info(ctx):
+    countdown_text = I18N.get(Keys.COUNTDOWN, ctx.lang).format(countdown())
+    question = make_question()
+    return f"{countdown_text}\n\n{question}"
+
+
 CMD.register_command("help", cmd_help)
 CMD.register_command("toggle", cmd_toggle)
 CMD.register_command("lang", cmd_lang, [], ["lang"])
@@ -144,3 +151,4 @@ CMD.register_command("roll", cmd_roll)
 CMD.register_command("scream", cmd_scream)
 CMD.register_command("ping", cmd_ping)
 CMD.register_command("about", cmd_about)
+CMD.register_command("info", cmd_info)

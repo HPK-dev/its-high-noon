@@ -159,7 +159,7 @@ def random_one(reset_if_exhausted: bool = True) -> Optional[Question]:
     """
 
     # First, check the total number of questions
-    result = DATABASE.execute("SELECT COUNT(*) FROM questions", return_value=True)
+    result = DATABASE.execute("SELECT COUNT(*) FROM questions")
     total_questions = result[0]['count']
 
     # If all questions have been returned
