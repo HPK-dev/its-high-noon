@@ -137,7 +137,7 @@ def cmd_about(ctx):
 
 def cmd_info(ctx):
     countdown_text = I18N.get(Keys.COUNTDOWN, ctx.lang).format(countdown())
-    question = make_question()
+    question = make_question() or I18N.get(Keys.RAN_OUT_QUESTIONS, ctx.lang)
     return f"{countdown_text}\n\n{question}"
 
 
