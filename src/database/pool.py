@@ -3,6 +3,7 @@ from typing import Any, List, Tuple
 
 import psycopg2
 from psycopg2.pool import SimpleConnectionPool
+from psycopg2.extras import DictCursor, DictRow
 
 LOGGER = logging.getLogger("db.pool")
 
@@ -22,7 +23,7 @@ class ConnectionPool:
     def close(self):
         self.pool.closeall()
 
-    def execute(self, query: str, args: List[str] = ()) -> List[Tuple[Any, ...]] | None:
+    def execute(self, query: str, args: List[str] = ()) -> List[dict[Any, ...]] | None:
         """
         Execute an SQL query and fetch the results.
 
@@ -38,17 +39,18 @@ class ConnectionPool:
         :type args: List[str]
 
         :return: The results of the query as a list of dictionary rows, or None if there is no result
-        :rtype: List[DictRow[Any, ...]] | None
+        :rtype: List[dict[Any, ...]] | None
 
         :raises Exception: If unable to execute the query due to an error
         """
         conn = self.pool.getconn()
         try:
-            with conn.cursor() as cur:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
                 cur.execute(query, args)
                 conn.commit()
 
-                return cur.fetchall()
+                result = cur.fetchall()
+                return [dict(item) for item in result]
 
         except psycopg2.ProgrammingError:
             return None

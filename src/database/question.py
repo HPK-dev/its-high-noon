@@ -77,7 +77,7 @@ def get(question_id: int) -> Optional[Question]:
     question = result[0]
 
     if question:
-        return Question.from_dict(dict(question))
+        return Question.from_dict(question)
     return None
 
 
@@ -134,7 +134,7 @@ def search(search_term: str) -> list[Question]:
     search_pattern = f'%{search_term}%'
     result = DATABASE.execute(query, (search_pattern, search_pattern))
 
-    return [Question.from_dict(dict(q)) for q in result]
+    return [Question.from_dict(q) for q in result]
 
 
 RETURNED_QUESTIONS = set()
@@ -181,12 +181,11 @@ def random_one(reset_if_exhausted: bool = True) -> Optional[Question]:
                 """
         result = DATABASE.execute(query, {'returned_ids': tuple(RETURNED_QUESTIONS)})
 
-    question = result[0]
 
-    if question:
-        question_dict = dict(question)
-        RETURNED_QUESTIONS.add(question_dict['id'])
-        return Question.from_dict(question_dict)
+    if result:
+        question = result[0]
+        RETURNED_QUESTIONS.add(question['id'])
+        return Question.from_dict(question)
     return None
 
 

@@ -31,14 +31,14 @@ def toggle_enabled(user_id: str):
         (user_id,),
     )
 
-    return result[0][0]
+    return result[0]["enabled"]
 
 
 def get_enabled() -> Dict[str, List[str]]:
     result = DATABASE.execute("SELECT id, lang FROM Users WHERE enabled = TRUE")
     users = {}
-    for user_id, lang in result:
-        users.get(lang, []).append(user_id)
+    for d in result:
+        users.get(d["lang"], []).append(d["id"])
 
     return users
 
@@ -46,8 +46,8 @@ def get_enabled() -> Dict[str, List[str]]:
 def get_all() -> Dict[str, List[str]]:
     result = DATABASE.execute("SELECT id, lang FROM Users")
     users = {}
-    for user_id, lang in result:
-        users.get(lang, []).append(user_id)
+    for d in result:
+        users.get(d["lang"], []).append(d["id"])
 
     return users
 
@@ -57,7 +57,7 @@ def get_lang(user_id: str) -> Optional[str]:
         "SELECT lang FROM Users WHERE id = %s",
         (user_id,)
     )
-    return result[0][0] if result else None
+    return result[0]["lang"] if result else None
 
 
 def set_lang(user_id: str, lang: str):
