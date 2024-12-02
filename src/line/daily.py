@@ -43,6 +43,8 @@ def countdown() -> int:
 def send_msgs(msgs, users: List[str]):
     to = [users[i:i + 500] for i in range(0, len(users), 500)]
 
+    LOGGER.info(f"Sending messages to {len(users)} users")
+
     requests = ([
         MulticastRequest(
             messages=msgs,
@@ -51,10 +53,17 @@ def send_msgs(msgs, users: List[str]):
             customAggregationUnits=None
         ) for t in to])
 
+    tasks = []
+
     with ApiClient(CONFIGURATION) as api_client:
         line_bot_api = MessagingApi(api_client)
         for req in requests:
-            line_bot_api.multicast(req, x_line_retry_key=StrictStr(str(uuid.uuid4())))
+            thread = line_bot_api.multicast(req, x_line_retry_key=StrictStr(str(uuid.uuid4())), async_req=True)
+            tasks.append(thread)
+
+    for task in tasks:
+        result = task.get()
+        LOGGER.debug(result)
 
 
 def send_question():
