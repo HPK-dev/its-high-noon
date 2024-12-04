@@ -1,8 +1,10 @@
 import dataclasses
+import logging
 from typing import Optional, Dict, Any, List
 
 from src.const import DATABASE
 
+LOGGER = logging.getLogger("db.question")
 
 @dataclasses.dataclass
 class Question:
@@ -54,6 +56,8 @@ def create(subject: str, description: str, opts: str,
     """
     Create a new question in the database.
     """
+
+    LOGGER.debug(f"Creating question")
 
     DATABASE.execute(
         """

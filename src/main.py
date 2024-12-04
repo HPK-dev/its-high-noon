@@ -1,4 +1,5 @@
 import ipaddress
+import logging
 from functools import wraps
 
 from quart import render_template
@@ -8,6 +9,7 @@ from src.const import APP, SCHEDULER
 from src.database import question
 from src.database.limiter import rate_limited
 
+LOGGER = logging.getLogger("APP")
 
 def local_only(f):
     @wraps(f)
@@ -50,7 +52,6 @@ def local_only(f):
 
     return decorated_function
 
-
 ## Register routers ###
 @APP.route("/", methods=["GET"])
 async def hello_world():
@@ -74,6 +75,7 @@ async def new_question():
     fields = ["subject", "description", "opts", "ans"]
     fields_data = []
     data = await request.get_json()
+    LOGGER.trace(f"Parsed data: {data}")
 
     for f in fields:
         if f not in data:
