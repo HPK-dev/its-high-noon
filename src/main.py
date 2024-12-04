@@ -69,7 +69,6 @@ APP.route("/line_bot_webhook", methods=["POST"])(line.webhook.callback)
 
 ### Sensitive endpoints ###
 @APP.route("/db/question/create", methods=["POST"])
-@local_only
 @rate_limited
 async def new_question():
     fields = ["subject", "description", "opts", "ans"]
