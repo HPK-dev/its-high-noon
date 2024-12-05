@@ -11,6 +11,7 @@ from src.database.limiter import rate_limited
 
 LOGGER = logging.getLogger("APP")
 
+
 def local_only(f):
     @wraps(f)
     async def decorated_function(*args, **kwargs):
@@ -52,6 +53,7 @@ def local_only(f):
 
     return decorated_function
 
+
 ## Register routers ###
 @APP.route("/", methods=["GET"])
 async def hello_world():
@@ -72,21 +74,23 @@ APP.route("/line_bot_webhook", methods=["POST"])(line.webhook.callback)
 @APP.route("/db/question/create", methods=["POST"])
 @rate_limited
 async def new_question():
-    fields = ["subject", "description", "opts", "ans"]
-    fields_data = []
-    data = await request.get_json()
-    LOGGER.trace(f"Parsed data: {data}")
+    async with APP.app_context():
 
-    for f in fields:
-        if f not in data:
-            return f"{f}", 400
-        fields_data.append(data[f])
+        data = await request.get_json()
+        LOGGER.trace(f"Parsed data: {data}")
 
-    fields_data.append(data["explanation"])
-    fields_data.append(data["details"])
+        fields = ["subject", "description", "opts", "ans"]
+        fields_data = []
+        for f in fields:
+            if f not in data:
+                return f"{f}", 400
+            fields_data.append(data[f])
 
-    question.create(*fields_data)
-    return "", 200
+        fields_data.append(data["explanation"])
+        fields_data.append(data["details"])
+
+        question.create(*fields_data)
+        return "", 200
 
 
 @APP.route("/send/question", methods=["GET"])
