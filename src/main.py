@@ -86,8 +86,8 @@ def new_question():
                 return f"{f}", 400
             fields_data.append(data[f])
 
-        fields_data.append(data["explanation"])
-        fields_data.append(data["details"])
+        fields_data.append(data.get("explanation"))
+        fields_data.append(data.get("details"))
 
         question.create(*fields_data)
         return "", 200
