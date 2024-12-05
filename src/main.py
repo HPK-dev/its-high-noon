@@ -2,8 +2,8 @@ import ipaddress
 import logging
 from functools import wraps
 
-from quart import render_template
-from quart import request
+from flask import render_template
+from flask import request
 
 from src.const import APP, SCHEDULER
 from src.database import question
@@ -14,7 +14,7 @@ LOGGER = logging.getLogger("APP")
 
 def local_only(f):
     @wraps(f)
-    async def decorated_function(*args, **kwargs):
+    def decorated_function(*args, **kwargs):
         # Get client IP
         client_ip = request.remote_addr
 
@@ -56,13 +56,13 @@ def local_only(f):
 
 ## Register routers ###
 @APP.route("/", methods=["GET"])
-async def hello_world():
+def hello_world():
     return "Hello world from server!", 200
 
 
 @APP.route("/teapot", methods=["GET"])
-async def teapot():
-    return await render_template("teapot.html"), 418
+def teapot():
+    return render_template("teapot.html"), 418
 
 
 from src import line
@@ -73,10 +73,10 @@ APP.route("/line_bot_webhook", methods=["POST"])(line.webhook.callback)
 ### Sensitive endpoints ###
 @APP.route("/db/question/create", methods=["POST"])
 @rate_limited
-async def new_question():
-    async with APP.app_context():
+def new_question():
+    with APP.app_context():
 
-        data = await request.get_json()
+        data = request.get_json()
         LOGGER.trace(f"Parsed data: {data}")
 
         fields = ["subject", "description", "opts", "ans"]
@@ -96,7 +96,7 @@ async def new_question():
 @APP.route("/send/question", methods=["GET"])
 @local_only
 @rate_limited
-async def send_question():
+def send_question():
     line.daily.send_question()
     return "", 200
 
@@ -104,7 +104,7 @@ async def send_question():
 @APP.route("/send/answer", methods=["GET"])
 @local_only
 @rate_limited
-async def send_answer():
+def send_answer():
     line.daily.send_answer()
     return "", 200
 
@@ -112,7 +112,7 @@ async def send_answer():
 @APP.route("/send/countdown", methods=["GET"])
 @local_only
 @rate_limited
-async def send_countdown():
+def send_countdown():
     line.daily.send_countdown()
     return "", 200
 

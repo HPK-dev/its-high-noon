@@ -3,11 +3,11 @@ import logging
 import random
 from typing import Optional
 
+from flask import request, abort
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import ApiClient, MessagingApi, ReplyMessageRequest, TextMessage, ShowLoadingAnimationRequest
 from linebot.v3.webhooks import MessageEvent, TextMessageContent, UserSource, GroupSource
 from pydantic import StrictStr, StrictBool
-from quart import request, abort
 
 from src.const import I18N
 from src.database import user
@@ -18,11 +18,11 @@ from src.line.cmd import UnknownCommandError, MissingArgumentsError, NoCommandEr
 LOGGER = logging.getLogger("line-webhook")
 
 
-async def callback():
+def callback():
     """Handle LINE webhook callbacks."""
     try:
         signature = request.headers["X-Line-Signature"]
-        body = await request.get_data(as_text=True)
+        body = request.get_data(as_text=True)
 
         LOGGER.info("Received webhook: length=%d", len(body))
 

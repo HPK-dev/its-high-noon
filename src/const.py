@@ -3,8 +3,8 @@ from logging import getLogger
 from typing import TypeVar
 
 from dotenv import load_dotenv
-from quart import Quart
-from quart.logging import default_handler
+from flask import Flask
+from flask.logging import default_handler
 
 T = TypeVar("T")
 
@@ -55,7 +55,7 @@ user.init_db()
 question.init_db()
 limiter.init_db()
 
-APP = Quart(NAME)
+APP = Flask(NAME)
 getLogger(APP.name).removeHandler(default_handler)
 
 from src import scheduler
