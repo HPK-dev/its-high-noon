@@ -67,6 +67,8 @@ def send_msgs(msgs, users: List[str]):
 
 
 def send_question():
+    LOGGER.debug("Send question")
+
     targets = user.get_enabled()
     for (lang, users) in targets.items():
         question_text = make_question() or I18N.get(Keys.RAN_OUT_QUESTIONS, lang)
@@ -80,6 +82,8 @@ def send_question():
 
 
 def send_answer():
+    LOGGER.debug("Send answer")
+
     targets = user.get_enabled()
     for (lang, users) in targets.items():
         answer_text = make_answer() or I18N.get(Keys.RAN_OUT_QUESTIONS, lang)
@@ -93,6 +97,8 @@ def send_answer():
 
 
 def send_countdown():
+    LOGGER.debug("Send countdown")
+
     targets = user.get_all()
 
     for (lang, users) in targets.items():
