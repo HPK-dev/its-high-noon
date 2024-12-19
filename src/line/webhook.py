@@ -1,7 +1,6 @@
 import dataclasses
 import logging
 import random
-from functools import reduce
 from typing import Optional
 
 from flask import request, abort
@@ -147,11 +146,11 @@ def process_message(ctx: ProcessContext) -> str | None:
               or "owo" in text.lower()
               or "uwu" in text.lower()):
             return "Ciallo (∠·ω )⌒★"
-        elif reduce(lambda a, b: a or b, map(lambda s: s.lower() in text.lower(), I18N.get(Keys.EAT_REPLY, ctx.lang))):
+        elif any(s in text for s in I18N.get(Keys.EAT_REPLY, ctx.lang)):
             return random.choice(I18N.get(Keys.EAT_RESPONSE, ctx.lang))
         elif text == "+1":
             return "+1"
-        elif reduce(lambda a, b: a or b, map(lambda s: s.lower() in text.lower(), I18N.get(Keys.JOKE_REPLY, ctx.lang))):
+        elif any(s in text for s in I18N.get(Keys.JOKE_REPLY, ctx.lang)):
             return random.choice(I18N.get(Keys.JOKE_RESPONSE, ctx.lang))
         elif text == "666":
             return "666"
