@@ -53,6 +53,7 @@ class Keys(enum.Enum):
 
     EAT_REPLY = 'eat_reply'
     EAT_RESPONSE = 'eat_response'
+    EAT_RESPONSE_TEMPLATE = 'eat_response_template'
 
 
 
