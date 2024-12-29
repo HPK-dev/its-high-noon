@@ -146,12 +146,40 @@ def process_message(ctx: ProcessContext) -> str | None:
               or "owo" in text.lower()
               or "uwu" in text.lower()):
             return "Ciallo (∠·ω )⌒★"
-        elif I18N.get(Keys.EAT_REPLY, ctx.lang) in text:
-            return random.choice(I18N.get(Keys.EAT_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.EAT_REPLY, ctx.lang)):
+            return random.choice(I18N.get(Keys.EAT_RESPONSE_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.EAT_RESPONSE, ctx.lang)))
         elif text == "+1":
             return "+1"
-        elif I18N.get(Keys.JOKE_REPLY, ctx.lang) in text:
+        elif any(s in text for s in I18N.get(Keys.JOKE_REPLY, ctx.lang)):
             return random.choice(I18N.get(Keys.JOKE_RESPONSE, ctx.lang))
+        elif text == "666":
+            return "666"
+        elif any(s in text for s in I18N.get(Keys.ONLINE_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.ONLINE_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.CHEERS_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.CHEERS_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.HAHA_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.HAHA_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.WEATHER_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.WEATHER_RESPONSE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.WEATHER_DESC, ctx.lang)),
+                random.choice(I18N.get(Keys.ACTIVITY, ctx.lang))
+            )
+        elif any(s in text for s in I18N.get(Keys.GREETINGS_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.GREETINGS_RESPONSE, ctx.lang))
 
+        elif any(s in text for s in I18N.get(Keys.DECISION_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.DECISION_RESPONSE, ctx.lang))
 
+        elif any(s in text for s in I18N.get(Keys.TRIVIA_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.TRIVIA_RESPONSE, ctx.lang))
+
+        elif any(s in text for s in I18N.get(Keys.ENCOURAGEMENT_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.ENCOURAGEMENT_RESPONSE, ctx.lang))
+
+        elif any(s in text for s in I18N.get(Keys.QUOTE_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.QUOTE_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.MYGO_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.MYGO_RESPONSE, ctx.lang))
     return None

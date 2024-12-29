@@ -53,7 +53,41 @@ class Keys(enum.Enum):
 
     EAT_REPLY = 'eat_reply'
     EAT_RESPONSE = 'eat_response'
+    EAT_RESPONSE_TEMPLATE = 'eat_response_template'
 
+    ONLINE_REPLY = 'online_reply'
+    ONLINE_RESPONSE = 'online_response'
+
+    CHEERS_REPLY = 'cheers_reply'
+    CHEERS_RESPONSE = 'cheers_response'
+
+    HAHA_REPLY = 'haha_reply'
+    HAHA_RESPONSE = 'haha_response'
+
+    WEATHER_REPLY = 'weather_reply'
+    WEATHER_RESPONSE = 'weather_response'
+    WEATHER_DESC = 'weather_desc'
+    ACTIVITY = 'activity'
+
+    GREETINGS_REPLY = 'greetings_reply'
+    GREETINGS_RESPONSE = 'greetings_response'
+
+    DECISION_REPLY = 'decision_reply'
+    DECISION_RESPONSE = 'decision_response'
+
+    TRIVIA_REPLY = 'trivia_reply'
+    TRIVIA_RESPONSE = 'trivia_response'
+
+    ENCOURAGEMENT_REPLY = 'encouragement_reply'
+    ENCOURAGEMENT_RESPONSE = 'encouragement_response'
+
+    QUOTE_REPLY = 'quote_reply'
+    QUOTE_RESPONSE = 'quote_response'
+
+    CALCULATE_RESPONSE = 'calculate_response'
+
+    MYGO_REPLY = 'mygo_reply'
+    MYGO_RESPONSE = 'mygo_response'
 
 
 class I18nManager:

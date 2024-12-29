@@ -24,7 +24,7 @@ class Question:
         return f"{self.description}\n\n{self.opts}"
 
     def make_answer(self):
-        return f"Ans:{self.ans}\n\n{self.explanation}"
+        return f"Ans:{self.ans}\n\n{self.explanation if self.explanation else ''}"
 
     def make_full(self):
         return f"{self.make_question()}\n\n{self.make_answer()}\n\n{self.details}"
