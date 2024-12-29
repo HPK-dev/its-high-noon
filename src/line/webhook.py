@@ -180,4 +180,6 @@ def process_message(ctx: ProcessContext) -> str | None:
 
         elif any(s in text for s in I18N.get(Keys.QUOTE_REPLY, ctx.lang)): 
             return random.choice(I18N.get(Keys.QUOTE_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.MYGO_REPLY, ctx.lang)): 
+            return random.choice(I18N.get(Keys.MYGO_RESPONSE, ctx.lang))
     return None

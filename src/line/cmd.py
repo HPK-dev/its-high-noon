@@ -7,6 +7,7 @@ from src.const import I18N
 from src.database import user
 from src.i18n import Keys, Langs
 from src.line.daily import make_question, make_answer, countdown
+from src.line.calculate import calculate
 
 LOGGER = logging.getLogger("line-webhook-cmd")
 
@@ -146,6 +147,8 @@ def cmd_answer(ctx):
     answer = make_answer() or I18N.get(Keys.RAN_OUT_QUESTIONS, ctx.lang)
     return f"{countdown_text}\n\n{answer}"
 
+def cmd_calculate(ctx, expression: str):
+    return I18N.get(Keys.CALCULATE_RESPONSE, ctx.lang).format(calculate(expression))
 
 CMD.register_command("help", cmd_help)
 CMD.register_command("toggle", cmd_toggle)
@@ -159,3 +162,4 @@ CMD.register_command("ping", cmd_ping)
 CMD.register_command("about", cmd_about)
 CMD.register_command("info", cmd_info)
 CMD.register_command("answer", cmd_answer)
+CMD.register_command("calculate", cmd_calculate, ["expression"])

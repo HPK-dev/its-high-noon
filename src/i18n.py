@@ -84,6 +84,11 @@ class Keys(enum.Enum):
     QUOTE_REPLY = 'quote_reply'
     QUOTE_RESPONSE = 'quote_response'
 
+    CALCULATE_RESPONSE = 'calculate_response'
+
+    MYGO_REPLY = 'mygo_reply'
+    MYGO_RESPONSE = 'mygo_response'
+
 
 class I18nManager:
     def __init__(self, locale_directory: str, default_locale: Langs):
