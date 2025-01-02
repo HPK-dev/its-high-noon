@@ -1,6 +1,7 @@
 import dataclasses
 import logging
 import random
+import re
 from typing import Optional
 
 from flask import request, abort
@@ -14,6 +15,7 @@ from src.database import user
 from src.i18n import Keys, Langs
 from src.line import HANDLER, CONFIGURATION
 from src.line.cmd import UnknownCommandError, MissingArgumentsError, NoCommandError, CMD
+from src.line.calculate import calculate
 
 LOGGER = logging.getLogger("line-webhook")
 
@@ -177,9 +179,57 @@ def process_message(ctx: ProcessContext) -> str | None:
 
         elif any(s in text for s in I18N.get(Keys.ENCOURAGEMENT_REPLY, ctx.lang)): 
             return random.choice(I18N.get(Keys.ENCOURAGEMENT_RESPONSE, ctx.lang))
-
         elif any(s in text for s in I18N.get(Keys.QUOTE_REPLY, ctx.lang)): 
             return random.choice(I18N.get(Keys.QUOTE_RESPONSE, ctx.lang))
         elif any(s in text for s in I18N.get(Keys.MYGO_REPLY, ctx.lang)): 
             return random.choice(I18N.get(Keys.MYGO_RESPONSE, ctx.lang))
+        elif any(s in text for s in I18N.get(Keys.CHAT_REPLY, ctx.lang)):
+            feel_template = random.choice(I18N.get(Keys.CHAT_RESPONSE_FEEL_TEMPLATE, ctx.lang))
+            feel_component1 = random.choice(I18N.get(Keys.CHAT_RESPONSE_FEEL_COMPONENT1, ctx.lang))
+            feel_component2 = random.choice(I18N.get(Keys.CHAT_RESPONSE_FEEL_COMPONENT2, ctx.lang))
+            return random.choice(I18N.get(Keys.CHAT_RESPONSE_TEMPLATE, ctx.lang)).format(
+                feel_template.format(feel_component1, feel_component2),
+                random.choice(I18N.get(Keys.CHAT_RESPONSE_DISCOVERY, ctx.lang)),
+                random.choice(I18N.get(Keys.CHAT_RESPONSE_CONCLUSION, ctx.lang)),
+                random.choice(I18N.get(Keys.CHAT_RESPONSE_ACTION, ctx.lang))
+            )
+        elif any(s in text for s in I18N.get(Keys.CALCULATE_REPLY, ctx.lang)): 
+            if random.randint(1, 2) <= 1:
+                return random.choice(I18N.get(Keys.CALCULATE_NO_RESPONSE, ctx.lang))
+            else:
+                match = re.search(r"[0-9+\-*/%^]+", text)
+                calculation_formula = match.group(0) if match else ""
+                return random.choice(I18N.get(Keys.CALCULATE_WITH_SNARKY_RESPONSE, ctx.lang)).format(calculate(calculation_formula))
+        elif any(s in text for s in I18N.get(Keys.NONSENSE_REPLY, ctx.lang)):
+            sentence1 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE1_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT1, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT2, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT3, ctx.lang))
+            )
+            sentence2 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE2_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT3, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT4, ctx.lang))
+            )
+            sentence3 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE3_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT2, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT4, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT1, ctx.lang))
+            )
+            sentence4 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE4_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT4, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT2, ctx.lang))
+            )
+            sentence5 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE5_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT1, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT3, ctx.lang))
+            )
+            sentence6 = random.choice(I18N.get(Keys.NONSENSE_SENTENCE6_TEMPLATE, ctx.lang)).format(
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT2, ctx.lang)),
+                random.choice(I18N.get(Keys.NONSENSE_COMPONENT4, ctx.lang))
+            )
+            return I18N.get(Keys.NONSENSE_PARAGRAPH_TEMPLATE, ctx.lang).format(
+                sentence1, sentence2, sentence3, sentence4, sentence5, sentence6
+            )
+
+
     return None

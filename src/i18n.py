@@ -84,11 +84,35 @@ class Keys(enum.Enum):
     QUOTE_REPLY = 'quote_reply'
     QUOTE_RESPONSE = 'quote_response'
 
+    CALCULATE_REPLY = "calculate_reply"
     CALCULATE_RESPONSE = 'calculate_response'
+    CALCULATE_NO_RESPONSE = 'calculate_no_response'
+    CALCULATE_WITH_SNARKY_RESPONSE = 'calculate_with_snarky_response'
 
     MYGO_REPLY = 'mygo_reply'
     MYGO_RESPONSE = 'mygo_response'
 
+    CHAT_REPLY = 'chat_reply'
+    CHAT_RESPONSE_TEMPLATE = 'chat_response_template'
+    CHAT_RESPONSE_FEEL_TEMPLATE = 'chat_response_feel_template'
+    CHAT_RESPONSE_FEEL_COMPONENT1 = 'chat_response_feel_component1'
+    CHAT_RESPONSE_FEEL_COMPONENT2 = 'chat_response_feel_component2'
+    CHAT_RESPONSE_DISCOVERY = 'chat_response_discovery'
+    CHAT_RESPONSE_CONCLUSION = 'chat_response_conclusion'
+    CHAT_RESPONSE_ACTION = 'chat_response_action'
+
+    NONSENSE_REPLY = 'nonsense_reply'
+    NONSENSE_PARAGRAPH_TEMPLATE= 'nonsense_paragraph_template'
+    NONSENSE_SENTENCE1_TEMPLATE = 'nonsense_sentence1_template'
+    NONSENSE_SENTENCE2_TEMPLATE = 'nonsense_sentence2_template'
+    NONSENSE_SENTENCE3_TEMPLATE = 'nonsense_sentence3_template'
+    NONSENSE_SENTENCE4_TEMPLATE = 'nonsense_sentence4_template'
+    NONSENSE_SENTENCE5_TEMPLATE = 'nonsense_sentence5_template'
+    NONSENSE_SENTENCE6_TEMPLATE = 'nonsense_sentence6_template'
+    NONSENSE_COMPONENT1 = 'nonsense_component1'
+    NONSENSE_COMPONENT2 = 'nonsense_component2'
+    NONSENSE_COMPONENT3 = 'nonsense_component3'
+    NONSENSE_COMPONENT4 = 'nonsense_component4'
 
 class I18nManager:
     def __init__(self, locale_directory: str, default_locale: Langs):
