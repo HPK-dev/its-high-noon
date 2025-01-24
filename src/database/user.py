@@ -9,7 +9,7 @@ def init_db():
                 (
                     id      text NOT NULL PRIMARY KEY,
                     enabled boolean NOT NULL DEFAULT FALSE,
-                    lang  text NOT NULL DEFAULT 'en'
+                    lang  text NOT NULL DEFAULT 'zh-tw'
                 );
             """)
 
