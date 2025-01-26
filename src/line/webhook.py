@@ -246,5 +246,5 @@ def process_message(ctx: ProcessContext) -> str | None:
             if anser == "error_404":
                 pass
             else:
-                return random.choice(I18N.get(Keys.choose_response, ctx.lang)).format(anser)
+                return random.choice(I18N.get(Keys.CHOOSE_RESPONSE, ctx.lang)).format(anser)
     return None
