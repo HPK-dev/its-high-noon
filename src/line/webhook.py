@@ -16,6 +16,7 @@ from src.i18n import Keys, Langs
 from src.line import HANDLER, CONFIGURATION
 from src.line.cmd import UnknownCommandError, MissingArgumentsError, NoCommandError, CMD
 from src.line.calculate import calculate
+from src.line.chat_bot_response import chatbot_response
 
 LOGGER = logging.getLogger("line-webhook")
 
@@ -247,4 +248,6 @@ def process_message(ctx: ProcessContext) -> str | None:
                 pass
             else:
                 return random.choice(I18N.get(Keys.CHOOSE_RESPONSE, ctx.lang)).format(anser)
+        elif any(s in text for s in I18N.get(Keys.CHAT_BOT_REPLY, ctx.lang)): 
+            return chatbot_response(text)
     return None

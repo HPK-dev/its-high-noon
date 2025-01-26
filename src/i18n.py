@@ -117,6 +117,8 @@ class Keys(enum.Enum):
     CHOOSE_REPLY = 'choose_reply'
     CHOOSE_RESPONSE = 'choose_response'
 
+    CHAT_BOT_REPLY = 'chat_bot_reply'
+
 class I18nManager:
     def __init__(self, locale_directory: str, default_locale: Langs):
         self.locale_directory = locale_directory
