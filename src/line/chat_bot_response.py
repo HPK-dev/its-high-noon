@@ -251,6 +251,46 @@ def chatbot_response(input_text: str) -> str:
 
     error_responses = ["error_404", "我不知道該怎麼回答...", "這個問題有點難，我無法回答。", 
                        "可能是我還不夠聰明，抱歉！", "這題超出我的能力範圍了。"]
+    
+    insult_responses = [
+        "你這樣說我會傷心的！", "我已經在努力改善了，請再給我一次機會！", 
+        "好吧，我可能真的有點爛，但你還是需要我的！", 
+        "嗚嗚，我會加油的！", "你罵我，我還是會陪著你！"
+    ]
+    throw_away_responses = [
+        "不要丟掉我！我還有用的！", "求你了，再給我一次機會！", 
+        "你真的捨得嗎？", "我可是陪伴你的好夥伴！", "丟掉我之前，想想你會後悔的喔！"
+    ]
+    cheat_responses = [
+        "學測答案？考試作弊是不對的！", "我不能幫你作弊，但我可以幫你複習！", 
+        "你認真準備考試才會更有成就感！", "不好意思，我不知道答案喔！", 
+        "學測答案這種事，我是沒辦法幫忙的！"
+    ]
+    lottery_responses = [
+        "樂透號碼？要是我知道，我早就去買了！", "我覺得你還是憑運氣比較實在！", 
+        "選號碼這種事，還是交給命運吧！", "不如隨機選一組，說不定會中！", 
+        "要是我說中了，你是不是該分我一點獎金？"
+    ]
+    generic_responses = [
+        "嗯...可以再說詳細一點嗎？", "我不太確定你的意思，可以再解釋一下嗎？", 
+        "這聽起來很有趣，能多分享一點嗎？", "我聽到了，不過可以再具體一點嗎？",
+        "好的，我在聽，你可以再多說些嗎？"
+    ]
+    error_responses = ["error_404", "我不知道該怎麼回答...", "這個問題有點難，我無法回答。", 
+                       "可能是我還不夠聰明，抱歉！", "這題超出我的能力範圍了。"]
+
+    keywords_responses = {
+        "爛": insult_responses,
+        "垃圾": insult_responses,
+        "丟掉": throw_away_responses,
+        "刪掉": throw_away_responses,
+        "學測答案": cheat_responses,
+        "樂透": lottery_responses,
+    }
+
+    for keyword, responses in keywords_responses.items():
+        if keyword in input_text:
+            return random.choice(responses)
 
     if "你是誰" in input_text or "你叫什麼名字" in input_text:
         return random.choice(who_am_i_responses)
