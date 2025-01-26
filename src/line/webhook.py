@@ -121,7 +121,18 @@ def message(event: MessageEvent) -> None:
         # Send a generic error message to user
         send_reply(event, I18N.get(Keys.PROCESSING_ERROR))
 
-
+def process_and_select(input_string):
+    keywords = ["幫我選", "幫選", "選一下", "選哪個", "選一個", "隨機一個", "隨機", "抽取", "抽獎", "抽一個"]
+    for keyword in keywords:
+        input_string = input_string.replace(keyword, "")
+    parts = input_string.split()
+    if len(parts) == 1:
+        parts = parts[0].split("\n")
+    if len(parts) == 1:
+        parts = parts[0].split(",")
+    if len(parts) == 1:
+        return "error_404"
+    return random.choice([part.strip() for part in parts if part.strip() != ""])
 
 def process_message(ctx: ProcessContext) -> str | None:
     """Process incoming message and generate reply."""
@@ -230,6 +241,10 @@ def process_message(ctx: ProcessContext) -> str | None:
             return I18N.get(Keys.NONSENSE_PARAGRAPH_TEMPLATE, ctx.lang).format(
                 sentence1, sentence2, sentence3, sentence4, sentence5, sentence6
             )
-
-
+        elif any(s in text for s in I18N.get(Keys.CHOOSE_REPLY, ctx.lang)):
+            anser = process_and_select(text)
+            if anser == "error_404":
+                pass
+            else:
+                return random.choice(I18N.get(Keys.choose_response, ctx.lang)).format(anser)
     return None

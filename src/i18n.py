@@ -114,6 +114,9 @@ class Keys(enum.Enum):
     NONSENSE_COMPONENT3 = 'nonsense_component3'
     NONSENSE_COMPONENT4 = 'nonsense_component4'
 
+    CHOOSE_REPLY = 'choose_reply'
+    CHOOSE_RESPONSE = 'choose_response'
+
 class I18nManager:
     def __init__(self, locale_directory: str, default_locale: Langs):
         self.locale_directory = locale_directory
